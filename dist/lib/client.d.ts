@@ -1,14 +1,10 @@
 /**
  * Valid audio formats
- * @typedef {"pcm16"|"g711_ulaw"|"g711_alaw"} AudioFormatType
- */
-/**
- * @typedef {Object} AudioTranscriptionType
- * @property {"whisper-1"} model
+ * @typedef {'pcm16'|'g711_ulaw'|'g711_alaw'} AudioFormatType
  */
 /**
  * @typedef {Object} TurnDetectionServerVadType
- * @property {"server_vad"} type
+ * @property {'server_vad'} type
  * @property {number} [threshold]
  * @property {number} [prefix_padding_ms]
  * @property {number} [silence_duration_ms]
@@ -16,79 +12,78 @@
 /**
  * Tool definitions
  * @typedef {Object} ToolDefinitionType
- * @property {"function"} [type]
+ * @property {'function'} [type]
  * @property {string} name
  * @property {string} description
  * @property {{[key: string]: any}} parameters
  */
 /**
  * @typedef {Object} SessionResourceType
- * @property {string} [model]
  * @property {string[]} [modalities]
  * @property {string} [instructions]
- * @property {"alloy"|"ash"|"ballad"|"coral"|"echo"|"sage"|"shimmer"|"verse"} [voice]
+ * @property {'alloy'|'ash'|'ballad'|'coral'|'echo'|'sage'|'shimmer'|'verse'|'nova'|'onyx'|'fable'} [voice]
  * @property {AudioFormatType} [input_audio_format]
  * @property {AudioFormatType} [output_audio_format]
  * @property {AudioTranscriptionType|null} [input_audio_transcription]
  * @property {TurnDetectionServerVadType|null} [turn_detection]
  * @property {ToolDefinitionType[]} [tools]
- * @property {"auto"|"none"|"required"|{type:"function",name:string}} [tool_choice]
+ * @property {'auto'|'none'|'required'|{type:'function',name:string}} [tool_choice]
  * @property {number} [temperature]
- * @property {number|"inf"} [max_response_output_tokens]
+ * @property {number|'inf'} [max_response_output_tokens]
  */
 /**
- * @typedef {"in_progress"|"completed"|"incomplete"} ItemStatusType
+ * @typedef {'in_progress'|'completed'|'incomplete'} ItemStatusType
  */
 /**
  * @typedef {Object} InputTextContentType
- * @property {"input_text"} type
+ * @property {'input_text'} type
  * @property {string} text
  */
 /**
  * @typedef {Object} InputAudioContentType
- * @property {"input_audio"} type
+ * @property {'input_audio'} type
  * @property {string} [audio] base64-encoded audio data
  * @property {string|null} [transcript]
  */
 /**
  * @typedef {Object} TextContentType
- * @property {"text"} type
+ * @property {'text'} type
  * @property {string} text
  */
 /**
  * @typedef {Object} AudioContentType
- * @property {"audio"} type
+ * @property {'audio'} type
  * @property {string} [audio] base64-encoded audio data
  * @property {string|null} [transcript]
  */
 /**
  * @typedef {Object} SystemItemType
  * @property {string|null} [previous_item_id]
- * @property {"message"} type
+ * @property {'message'} type
  * @property {ItemStatusType} status
- * @property {"system"} role
+ * @property {'system'} role
  * @property {Array<InputTextContentType>} content
  */
 /**
  * @typedef {Object} UserItemType
  * @property {string|null} [previous_item_id]
- * @property {"message"} type
+ * @property {'message'} type
  * @property {ItemStatusType} status
- * @property {"user"} role
+ * @property {'user'} role
  * @property {Array<InputTextContentType|InputAudioContentType>} content
  */
 /**
  * @typedef {Object} AssistantItemType
  * @property {string|null} [previous_item_id]
- * @property {"message"} type
+ * @property {'message'} type
  * @property {ItemStatusType} status
- * @property {"assistant"} role
+ * @property {'assistant'} role
  * @property {Array<TextContentType|AudioContentType>} content
  */
 /**
  * @typedef {Object} FunctionCallItemType
  * @property {string|null} [previous_item_id]
- * @property {"function_call"} type
+ * @property {'function_call'} type
  * @property {ItemStatusType} status
  * @property {string} call_id
  * @property {string} name
@@ -97,13 +92,13 @@
 /**
  * @typedef {Object} FunctionCallOutputItemType
  * @property {string|null} [previous_item_id]
- * @property {"function_call_output"} type
+ * @property {'function_call_output'} type
  * @property {string} call_id
  * @property {string} output
  */
 /**
  * @typedef {Object} FormattedToolType
- * @property {"function"} type
+ * @property {'function'} type
  * @property {string} name
  * @property {string} call_id
  * @property {string} arguments
@@ -121,7 +116,7 @@
  * @typedef {Object} FormattedItemType
  * @property {string} id
  * @property {string} object
- * @property {"user"|"assistant"|"system"} [role]
+ * @property {'user'|'assistant'|'system'} [role]
  * @property {FormattedPropertyType} formatted
  */
 /**
@@ -132,12 +127,12 @@
  */
 /**
  * @typedef {Object} IncompleteResponseStatusType
- * @property {"incomplete"} type
- * @property {"interruption"|"max_output_tokens"|"content_filter"} reason
+ * @property {'incomplete'} type
+ * @property {'interruption'|'max_output_tokens'|'content_filter'} reason
  */
 /**
  * @typedef {Object} FailedResponseStatusType
- * @property {"failed"} type
+ * @property {'failed'} type
  * @property {{code: string, message: string}|null} error
  */
 /**
@@ -148,7 +143,7 @@
  */
 /**
  * @typedef {Object} ResponseResourceType
- * @property {"in_progress"|"completed"|"incomplete"|"cancelled"|"failed"} status
+ * @property {'in_progress'|'completed'|'incomplete'|'cancelled'|'failed'} status
  * @property {IncompleteResponseStatusType|FailedResponseStatusType|null} status_details
  * @property {ItemType[]} output
  * @property {UsageType|null} usage
@@ -157,9 +152,8 @@
  * RealtimeClient Settings
  * @typedef {Object} RealtimeClientSettings
  * @property {string} [url] - The URL for the realtime client
- * @property {string} [apiKey] - The API key
- * @property {string} [model] - The model name to use
- * @property {boolean} [dangerouslyAllowAPIKeyInBrowser] - Whether to allow API key in browser
+ * @property {string?} [turnDetection] - The turn detection type for the realtime client
+ * @property {string} [avatarId] - The avatarId
  * @property {boolean} [debug] - Enable debug mode
  */
 /**
@@ -171,11 +165,10 @@ export class RealtimeClient extends RealtimeEventHandler {
      * Create a new RealtimeClient instance
      * @param {RealtimeClientSettings} [settings]
      */
-    constructor({ url, apiKey, model, dangerouslyAllowAPIKeyInBrowser, debug, }?: RealtimeClientSettings);
+    constructor({ url, turnDetection, avatarId, debug }?: RealtimeClientSettings);
     defaultSessionConfig: {
         modalities: string[];
         instructions: string;
-        voice: string;
         input_audio_format: string;
         output_audio_format: string;
         input_audio_transcription: any;
@@ -185,11 +178,7 @@ export class RealtimeClient extends RealtimeEventHandler {
         temperature: number;
         max_response_output_tokens: number;
     };
-    realtimeModel: string;
     sessionConfig: {};
-    transcriptionModels: {
-        model: string;
-    }[];
     defaultServerVadConfig: {
         type: string;
         threshold: number;
@@ -240,7 +229,7 @@ export class RealtimeClient extends RealtimeEventHandler {
     disconnect(): void;
     /**
      * Gets the active turn detection mode
-     * @returns {"server_vad"|null}
+     * @returns {'server_vad'|null}
      */
     getTurnDetectionType(): "server_vad" | null;
     /**
@@ -270,7 +259,7 @@ export class RealtimeClient extends RealtimeEventHandler {
      * If the client is not yet connected, will save details and instantiate upon connection
      * @param {SessionResourceType} [sessionConfig]
      */
-    updateSession({ modalities, instructions, voice, input_audio_format, output_audio_format, input_audio_transcription, turn_detection, tools, tool_choice, temperature, max_response_output_tokens, }?: SessionResourceType): boolean;
+    updateSession({ tools, tool_choice }?: SessionResourceType): boolean;
     /**
      * Sends user message content and generates a response
      * @param {Array<InputTextContentType|InputAudioContentType>} content
@@ -283,11 +272,7 @@ export class RealtimeClient extends RealtimeEventHandler {
      * @returns {true}
      */
     appendInputAudio(arrayBuffer: Int16Array | ArrayBuffer): true;
-    /**
-     * Forces a model response generation
-     * @returns {true}
-     */
-    createResponse(): true;
+    createResponse(): boolean;
     /**
      * Cancels the ongoing server generation and truncates ongoing generation, if applicable
      * If no id provided, will simply call `cancel_generation` command
@@ -317,9 +302,6 @@ export class RealtimeClient extends RealtimeEventHandler {
  * Valid audio formats
  */
 export type AudioFormatType = "pcm16" | "g711_ulaw" | "g711_alaw";
-export type AudioTranscriptionType = {
-    model: "whisper-1";
-};
 export type TurnDetectionServerVadType = {
     type: "server_vad";
     threshold?: number;
@@ -338,10 +320,9 @@ export type ToolDefinitionType = {
     };
 };
 export type SessionResourceType = {
-    model?: string;
     modalities?: string[];
     instructions?: string;
-    voice?: "alloy" | "ash" | "ballad" | "coral" | "echo" | "sage" | "shimmer" | "verse";
+    voice?: "alloy" | "ash" | "ballad" | "coral" | "echo" | "sage" | "shimmer" | "verse" | "nova" | "onyx" | "fable";
     input_audio_format?: AudioFormatType;
     output_audio_format?: AudioFormatType;
     input_audio_transcription?: AudioTranscriptionType | null;
@@ -467,17 +448,13 @@ export type RealtimeClientSettings = {
      */
     url?: string;
     /**
-     * - The API key
+     * - The turn detection type for the realtime client
      */
-    apiKey?: string;
+    turnDetection?: string | null;
     /**
-     * - The model name to use
+     * - The avatarId
      */
-    model?: string;
-    /**
-     * - Whether to allow API key in browser
-     */
-    dangerouslyAllowAPIKeyInBrowser?: boolean;
+    avatarId?: string;
     /**
      * - Enable debug mode
      */
