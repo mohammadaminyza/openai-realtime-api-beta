@@ -15,7 +15,8 @@ export class RealtimeAPI extends RealtimeEventHandler {
     turnDetection: any;
     avatarId: any;
     debug: boolean;
-    ws: any;
+    ws: WebSocket;
+    getWebSocketUrl(url: any): string;
     /**
      * Tells us whether or not the WebSocket is connected
      * @returns {boolean}
