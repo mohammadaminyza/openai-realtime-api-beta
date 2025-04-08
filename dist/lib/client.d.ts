@@ -255,6 +255,12 @@ export class RealtimeClient extends RealtimeEventHandler {
      */
     deleteItem(id: string): true;
     /**
+     * Updates session configuration
+     * If the client is not yet connected, will save details and instantiate upon connection
+     * @param {SessionResourceType} [sessionConfig]
+     */
+    updateSession({ tools, tool_choice }?: SessionResourceType): boolean;
+    /**
      * Sends user message content and generates a response
      * @param {Array<InputTextContentType|InputAudioContentType>} content
      * @returns {true}
