@@ -242,6 +242,7 @@ export class RealtimeClient extends RealtimeEventHandler {
         definition: ToolDefinitionType;
         handler: Function;
     };
+    updateVision(content: any): boolean;
     /**
      * Removes a tool
      * @param {string} name
