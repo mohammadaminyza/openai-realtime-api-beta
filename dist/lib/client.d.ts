@@ -268,6 +268,12 @@ export class RealtimeClient extends RealtimeEventHandler {
      */
     sendUserMessageContent(content?: Array<InputTextContentType | InputAudioContentType>): true;
     /**
+     * Sends system message content and generates a response
+     * @param {InputTextContentType} content
+     * @returns {boolean}
+     */
+    sendSystemMessageContent(content: InputTextContentType): boolean;
+    /**
      * Appends user audio to the existing audio buffer
      * @param {Int16Array|ArrayBuffer} arrayBuffer
      * @returns {true}
