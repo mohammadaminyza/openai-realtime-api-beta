@@ -268,11 +268,11 @@ export class RealtimeClient extends RealtimeEventHandler {
      */
     sendUserMessageContent(content?: Array<InputTextContentType | InputAudioContentType>): true;
     /**
-     * Sends system message content and generates a response
-     * @param {Array<InputTextContentType|InputAudioContentType>} content
-     * * @returns {boolean}
+     * Sends instructions for the assistant to speak and generates a response.
+     * @param {string} text - The text for the assistant to say.
+     * @returns {boolean}
      */
-    sendAssistantMessageContent(content: Array<InputTextContentType | InputAudioContentType>): boolean;
+    sendAssistantMessageContent(text: string): boolean;
     /**
      * Appends user audio to the existing audio buffer
      * @param {Int16Array|ArrayBuffer} arrayBuffer
