@@ -152,8 +152,8 @@
  * RealtimeClient Settings
  * @typedef {Object} RealtimeClientSettings
  * @property {string} [url] - The URL for the realtime client
+ * @property {string?} [token] - The URL for the realtime client
  * @property {string?} [turnDetection] - The turn detection type for the realtime client
- * @property {string} [avatarId] - The avatarId
  * @property {boolean} [debug] - Enable debug mode
  */
 /**
@@ -165,7 +165,7 @@ export class RealtimeClient extends RealtimeEventHandler {
      * Create a new RealtimeClient instance
      * @param {RealtimeClientSettings} [settings]
      */
-    constructor({ url, turnDetection, avatarId, debug }?: RealtimeClientSettings);
+    constructor({ url, token, turnDetection, debug }?: RealtimeClientSettings);
     defaultSessionConfig: {
         modalities: string[];
         instructions: string;
@@ -455,13 +455,13 @@ export type RealtimeClientSettings = {
      */
     url?: string;
     /**
+     * - The URL for the realtime client
+     */
+    token?: string | null;
+    /**
      * - The turn detection type for the realtime client
      */
     turnDetection?: string | null;
-    /**
-     * - The avatarId
-     */
-    avatarId?: string;
     /**
      * - Enable debug mode
      */
