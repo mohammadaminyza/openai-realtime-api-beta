@@ -196,6 +196,7 @@ export class RealtimeClient extends RealtimeEventHandler {
     sessionCreated: boolean;
     tools: {};
     inputAudioBuffer: any;
+    inputVideoBuffer: any;
     /**
      * Sets up event handlers for a fully-functional application control flow
      * @private
@@ -279,6 +280,12 @@ export class RealtimeClient extends RealtimeEventHandler {
      * @returns {true}
      */
     appendInputAudio(arrayBuffer: Int16Array | ArrayBuffer): true;
+    /**
+     * Appends user video to the existing video buffer
+     * @param {Uint8Array|ArrayBuffer} arrayBuffer
+     * @returns {true}
+     */
+    appendInputVideo(arrayBuffer: Uint8Array | ArrayBuffer): true;
     createResponse(): boolean;
     /**
      * Cancels the ongoing server generation and truncates ongoing generation, if applicable

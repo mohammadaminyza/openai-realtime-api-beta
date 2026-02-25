@@ -29,6 +29,13 @@ export class RealtimeUtils {
      */
     static mergeInt16Arrays(left: ArrayBuffer | Int16Array, right: ArrayBuffer | Int16Array): Int16Array;
     /**
+     * Merge two Uint8Arrays from Uint8Arrays or ArrayBuffers
+     * @param {ArrayBuffer|Uint8Array} left
+     * @param {ArrayBuffer|Uint8Array} right
+     * @returns {Uint8Array}
+     */
+    static mergeUint8Arrays(left: ArrayBuffer | Uint8Array, right: ArrayBuffer | Uint8Array): Uint8Array;
+    /**
      * Generates an id to send with events and messages
      * @param {string} prefix
      * @param {number} [length]
