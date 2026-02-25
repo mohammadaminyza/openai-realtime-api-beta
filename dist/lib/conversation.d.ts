@@ -83,6 +83,7 @@ export class RealtimeConversation {
         };
     };
     queuedInputAudio: Int16Array;
+    queuedInputVideo: Uint8Array;
     /**
      * Clears the conversation history and resets to default
      * @returns {true}
@@ -100,6 +101,12 @@ export class RealtimeConversation {
      * @returns {Int16Array}
      */
     queueInputAudio(inputAudio: Int16Array): Int16Array;
+    /**
+     * Queue input video for manual video event
+     * @param {Uint8Array} inputVideo
+     * @returns {Uint8Array}
+     */
+    queueInputVideo(inputVideo: Uint8Array): Uint8Array;
     /**
      * Process an event from the WebSocket server and compose items
      * @param {Object} event

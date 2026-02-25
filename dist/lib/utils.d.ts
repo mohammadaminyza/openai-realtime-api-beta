@@ -16,11 +16,11 @@ export class RealtimeUtils {
      */
     static base64ToArrayBuffer(base64: string): ArrayBuffer;
     /**
-     * Converts an ArrayBuffer, Int16Array or Float32Array to a base64 string
-     * @param {ArrayBuffer|Int16Array|Float32Array} arrayBuffer
+     * Converts an ArrayBuffer, Int16Array, Uint8Array or Float32Array to a base64 string
+     * @param {ArrayBuffer|Int16Array|Uint8Array|Float32Array} arrayBuffer
      * @returns {string}
      */
-    static arrayBufferToBase64(arrayBuffer: ArrayBuffer | Int16Array | Float32Array): string;
+    static arrayBufferToBase64(arrayBuffer: ArrayBuffer | Int16Array | Uint8Array | Float32Array): string;
     /**
      * Merge two Int16Arrays from Int16Arrays or ArrayBuffers
      * @param {ArrayBuffer|Int16Array} left
