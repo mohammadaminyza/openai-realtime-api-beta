@@ -46,6 +46,11 @@
  * @property {string|null} [transcript]
  */
 /**
+ * @typedef {Object} InputVideoContentType
+ * @property {'input_video'} type
+ * @property {string} [video] base64-encoded video data
+ */
+/**
  * @typedef {Object} TextContentType
  * @property {'text'} type
  * @property {string} text
@@ -70,7 +75,7 @@
  * @property {'message'} type
  * @property {ItemStatusType} status
  * @property {'user'} role
- * @property {Array<InputTextContentType|InputAudioContentType>} content
+ * @property {Array<InputTextContentType|InputAudioContentType|InputVideoContentType>} content
  */
 /**
  * @typedef {Object} AssistantItemType
@@ -106,6 +111,7 @@
 /**
  * @typedef {Object} FormattedPropertyType
  * @property {Int16Array} [audio]
+ * @property {Uint8Array} [video]
  * @property {string} [text]
  * @property {string} [transcript]
  * @property {FormattedToolType} [tool]
@@ -196,6 +202,7 @@ export class RealtimeClient extends RealtimeEventHandler {
     sessionCreated: boolean;
     tools: {};
     inputAudioBuffer: any;
+    inputVideoBuffer: any;
     /**
      * Sets up event handlers for a fully-functional application control flow
      * @private
@@ -263,10 +270,10 @@ export class RealtimeClient extends RealtimeEventHandler {
     updateSession({ tools, tool_choice }?: SessionResourceType): boolean;
     /**
      * Sends user message content and generates a response
-     * @param {Array<InputTextContentType|InputAudioContentType>} content
+     * @param {Array<InputTextContentType|InputAudioContentType|InputVideoContentType>} content
      * @returns {true}
      */
-    sendUserMessageContent(content?: Array<InputTextContentType | InputAudioContentType>): true;
+    sendUserMessageContent(content?: Array<InputTextContentType | InputAudioContentType | InputVideoContentType>): true;
     /**
      * Sends instructions for the assistant to speak and generates a response.
      * @param {string} text - The text for the assistant to say.
@@ -279,6 +286,12 @@ export class RealtimeClient extends RealtimeEventHandler {
      * @returns {true}
      */
     appendInputAudio(arrayBuffer: Int16Array | ArrayBuffer): true;
+    /**
+     * Appends user video to the existing video buffer
+     * @param {Uint8Array|ArrayBuffer} arrayBuffer
+     * @returns {true}
+     */
+    appendInputVideo(arrayBuffer: Uint8Array | ArrayBuffer): true;
     createResponse(): boolean;
     /**
      * Cancels the ongoing server generation and truncates ongoing generation, if applicable
@@ -355,6 +368,13 @@ export type InputAudioContentType = {
     audio?: string;
     transcript?: string | null;
 };
+export type InputVideoContentType = {
+    type: "input_video";
+    /**
+     * base64-encoded video data
+     */
+    video?: string;
+};
 export type TextContentType = {
     type: "text";
     text: string;
@@ -379,7 +399,7 @@ export type UserItemType = {
     type: "message";
     status: ItemStatusType;
     role: "user";
-    content: Array<InputTextContentType | InputAudioContentType>;
+    content: Array<InputTextContentType | InputAudioContentType | InputVideoContentType>;
 };
 export type AssistantItemType = {
     previous_item_id?: string | null;
@@ -410,6 +430,7 @@ export type FormattedToolType = {
 };
 export type FormattedPropertyType = {
     audio?: Int16Array;
+    video?: Uint8Array;
     text?: string;
     transcript?: string;
     tool?: FormattedToolType;
