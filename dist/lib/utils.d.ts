@@ -16,11 +16,11 @@ export class RealtimeUtils {
      */
     static base64ToArrayBuffer(base64: string): ArrayBuffer;
     /**
-     * Converts an ArrayBuffer, Int16Array or Float32Array to a base64 string
-     * @param {ArrayBuffer|Int16Array|Float32Array} arrayBuffer
+     * Converts an ArrayBuffer, Int16Array, Uint8Array or Float32Array to a base64 string
+     * @param {ArrayBuffer|Int16Array|Uint8Array|Float32Array} arrayBuffer
      * @returns {string}
      */
-    static arrayBufferToBase64(arrayBuffer: ArrayBuffer | Int16Array | Float32Array): string;
+    static arrayBufferToBase64(arrayBuffer: ArrayBuffer | Int16Array | Uint8Array | Float32Array): string;
     /**
      * Merge two Int16Arrays from Int16Arrays or ArrayBuffers
      * @param {ArrayBuffer|Int16Array} left
@@ -28,6 +28,13 @@ export class RealtimeUtils {
      * @returns {Int16Array}
      */
     static mergeInt16Arrays(left: ArrayBuffer | Int16Array, right: ArrayBuffer | Int16Array): Int16Array;
+    /**
+     * Merge two Uint8Arrays from Uint8Arrays or ArrayBuffers
+     * @param {ArrayBuffer|Uint8Array} left
+     * @param {ArrayBuffer|Uint8Array} right
+     * @returns {Uint8Array}
+     */
+    static mergeUint8Arrays(left: ArrayBuffer | Uint8Array, right: ArrayBuffer | Uint8Array): Uint8Array;
     /**
      * Generates an id to send with events and messages
      * @param {string} prefix
