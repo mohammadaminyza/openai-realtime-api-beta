@@ -13,9 +13,15 @@
  * @class
  */
 export class RealtimeConversation {
+    static TEXT_CONTENT_TYPES: string[];
+    static AUDIO_CONTENT_TYPES: string[];
     defaultFrequency: number;
     EventProcessors: {
-        'conversation.item.created': (event: any) => {
+        'conversation.item.added': (event: any) => {
+            item: any;
+            delta: any;
+        };
+        'conversation.item.done': (event: any) => {
             item: any;
             delta: any;
         };
@@ -46,8 +52,12 @@ export class RealtimeConversation {
             delta: any;
         };
         'response.output_item.added': (event: any) => {
-            item: any;
-            delta: any;
+            item: null;
+            delta: null;
+        };
+        'response.output_item.created': (event: any) => {
+            item: null;
+            delta: null;
         };
         'response.output_item.done': (event: any) => {
             item: any;
@@ -57,23 +67,39 @@ export class RealtimeConversation {
             item: any;
             delta: any;
         };
-        'response.audio_transcript.delta': (event: any) => {
+        'response.content_part.done': (event: any) => {
+            item: any;
+            delta: any;
+        };
+        'response.output_audio_transcript.delta': (event: any) => {
             item: any;
             delta: {
                 transcript: any;
             };
         };
-        'response.audio.delta': (event: any) => {
+        'response.output_audio_transcript.done': (event: any) => {
+            item: any;
+            delta: any;
+        };
+        'response.output_audio.delta': (event: any) => {
             item: any;
             delta: {
                 audio: Int16Array;
             };
         };
-        'response.text.delta': (event: any) => {
+        'response.output_audio.done': (event: any) => {
+            item: any;
+            delta: any;
+        };
+        'response.output_text.delta': (event: any) => {
             item: any;
             delta: {
                 text: any;
             };
+        };
+        'response.output_text.done': (event: any) => {
+            item: any;
+            delta: any;
         };
         'response.function_call_arguments.delta': (event: any) => {
             item: any;
@@ -81,8 +107,15 @@ export class RealtimeConversation {
                 arguments: any;
             };
         };
+        'response.function_call_arguments.done': (event: any) => {
+            item: any;
+            delta: any;
+        };
+        'response.done': () => {
+            item: any;
+            delta: any;
+        };
     };
-    queuedInputAudio: Int16Array;
     /**
      * Clears the conversation history and resets to default
      * @returns {true}
@@ -94,12 +127,27 @@ export class RealtimeConversation {
     responses: any[];
     queuedSpeechItems: {};
     queuedTranscriptItems: {};
+    queuedInputAudio: Int16Array;
     /**
      * Queue input audio for manual speech event
      * @param {Int16Array} inputAudio
      * @returns {Int16Array}
      */
     queueInputAudio(inputAudio: Int16Array): Int16Array;
+    /**
+     * Registers an item in the conversation cache
+     * @param {Object} item
+     * @returns {Object}
+     * @private
+     */
+    private _registerItem;
+    /**
+     * Handles response output item lifecycle events
+     * @param {Object} event
+     * @returns {{item: null, delta: null}}
+     * @private
+     */
+    private _processOutputItemAdded;
     /**
      * Process an event from the WebSocket server and compose items
      * @param {Object} event

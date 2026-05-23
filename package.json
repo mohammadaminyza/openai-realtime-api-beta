@@ -1,7 +1,6 @@
 {
   "name": "@openai/realtime-api-beta",
-  "version": "1.5",
-  "private": true,
+  "version": "2.0.3",
   "type": "module",
   "description": "OpenAI Realtime API Reference Client (beta)",
   "main": "index.js",
